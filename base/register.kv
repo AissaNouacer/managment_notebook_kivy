@@ -1,4 +1,5 @@
-BoxLayout:
+GridLayout:
+    rows:1
     orientation: 'vertical'
     canvas.before:
         Rectangle:
@@ -11,19 +12,17 @@ BoxLayout:
         col_force_default:True
         row_default_height:40
         col_default_width:500
+        pos_hint:{'right':0.5}
         TextInput:
             id:usr
             multiline:False
             size_hint:( .4, .1)
-            pos_hint:{'right':0.6,'top':.2}
         TextInput:
             id:password
             multiline:False
             size_hint:( .4, .1)
-            pos_hint:{'right':0.6,'top':.2}
 
         Button:
             size_hint:(0.2, 0.1)
-            pos_hint:{'right':0.6,'top':.2}
             text: "Login"
             background_color: 1,233,32,95

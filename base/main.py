@@ -4,6 +4,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 import os
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
+import sqlite3
 
 from connected import Connected
 
@@ -32,13 +33,29 @@ class Login(Screen):
 
 
         else:
-            cred ={
-                "aissa":"load",
-                "mehdi":"loadT11"
-            }
-            if(app.username in cred and cred[app.username]== app.password):
-                self.manager.transition = SlideTransition(direction="left")
-                self.manager.current = 'connected'
+            conn = sqlite3.connect("users.db")
+            c = conn.cursor()
+#              c.execute('''
+                     #  CREATE TABLE IF NOT EXISTS user (name text PRIMARY KEY, password text)
+                     #  ''')
+
+           #   c.execute('''
+                     #  INSERT INTO user VALUES('aissa', 'load')
+                     #  ''')
+            #  conn.commit()
+            #  user=[ele for ele in c.execute("select * from user where name='{}'".format(app.username))]
+            c.execute("select * from user where name='{}'".format(app.username))
+            user=c.fetchone()
+            if(user != None):
+                cerds={
+                    "name": user[0],
+                    "password": user[1]
+                    #  "name":"aissa",
+                    #  "password":"load"
+                }
+                if(cerds["name"]== app.username and cerds["password"]== app.password):
+                    self.manager.transition = SlideTransition(direction="left")
+                    self.manager.current = 'connected'
             else:
                 popup = Popup(title='creds not correct',
                               content=Label(text='Your username or password not correct'),

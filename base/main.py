@@ -19,7 +19,7 @@ class Login(Screen):
 
         app.config.read(app.get_application_config())
         app.config.write()
-    def rest_form(self):
+    def reset_form(self):
         self.ids['usr'].text = ""
         self.ids['password'].text = ""
 
@@ -39,12 +39,11 @@ class LoginApp(App):
     def get_application_config(self):
         if(not self.username):
             return super(LoginApp, self).get_application_config()
-        conf_directory = self.user_data_dir +"/"+ self.username
+        conf_directory = os.path.join(self.user_data_dir ,self.username)
         if( not os.path.exists(conf_directory)):
             os.makedirs(conf_directory)
             return super(LoginApp,self).get_application_config(
-                '{}/config.cfg'.format(conf_directory)
-            )
+                '{}/config.cfg'.format(conf_directory))
 
 if __name__ == "__main__":
     LoginApp().run()

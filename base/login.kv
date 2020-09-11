@@ -1,0 +1,31 @@
+#include connected.kv
+<login>:
+    BoxLayout:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "Bb.png"
+        BoxLayout:
+            orientation:'vertical'
+            FloatLayout:
+                TextInput:
+                    hint_text:"Username"
+                    size_hint:( .4, .1)
+                    pos_hint:{'right':0.7, 'y':0.3}
+                    id:usr
+                    multiline:False
+                TextInput:
+                    hint_text:"Password"
+                    size_hint:( .4, .1)
+                    pos_hint:{'right':0.7, 'y':0.2}
+                    id:password
+                    password:True
+                    multiline:False
+
+                Button:
+                    pos_hint:{'right':0.7, 'y':0.1}
+                    size_hint:( .4, .1)
+                    text: "Login"
+                    background_color: 1,233,32,95
+                    on_press: root.do_login(usr.text, password.text)

@@ -20,16 +20,11 @@ class Login(Screen):
         app.username = usr_text
         app.password = pass_text
         if(not app.username and not app.password):
-            popup = Popup(title='Username & password',
-                          content=Label(text=' Username & password not set'),
-                          size_hint=(None, None), size=(400, 400))
-            popup.open()
-            print("")
+            info = "username and passowrd are required"
+            self.ids.info.text=info
         elif(not app.username or not app.password):
-            popup = Popup(title='Username or password',
-                          content=Label(text='Username or password not set'),
-                          size_hint=(None, None), size=(400, 400))
-            popup.open()
+            info = "username or passowrd are required!"
+            self.ids.info.text=info
 
 
         else:
@@ -57,10 +52,8 @@ class Login(Screen):
                     self.manager.transition = SlideTransition(direction="left")
                     self.manager.current = 'connected'
             else:
-                popup = Popup(title='creds not correct',
-                              content=Label(text='Your username or password not correct'),
-                              size_hint=(None, None), size=(400, 400))
-                popup.open()
+                info = "Invalid username or passowrd!"
+                self.ids.info.text=info
 
 
 

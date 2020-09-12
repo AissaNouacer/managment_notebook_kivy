@@ -1,4 +1,18 @@
 #:include connected.kv
+#:import utils kivy.utils
+<SmoothButton@Button+Label>:
+    background_color:(0,0,0,0)
+    background_normal:''
+    back_color:( 0,1,1,.5)
+
+    border_radius:[18]
+    canvas.before:
+        Color:
+            rgba:self.back_color
+        RoundedRectangle:
+            size:self.size
+            pos:self.pos
+            radius:self.border_radius
 <login>:
     BoxLayout:
         canvas.before:
@@ -9,23 +23,30 @@
         BoxLayout:
             orientation:'vertical'
             FloatLayout:
+                Label:
+                    text:""
+                    color: utils.get_color_from_hex("#FF0000")
+                    id:info
+                    bold:True
                 TextInput:
                     hint_text:"Username"
                     size_hint:( .4, .1)
-                    pos_hint:{'right':0.7, 'y':0.3}
+                    pos_hint:{'right':0.7, 'y':0.34}
                     id:usr
                     multiline:False
+                    focus:True
                 TextInput:
                     hint_text:"Password"
                     size_hint:( .4, .1)
-                    pos_hint:{'right':0.7, 'y':0.2}
+                    pos_hint:{'right':0.7, 'y':0.23}
                     id:password
                     password:True
                     multiline:False
-
-                Button:
+                    focus:True
+                SmoothButton:
                     pos_hint:{'right':0.7, 'y':0.1}
                     size_hint:( .4, .1)
                     text: "Login"
-                    background_color: 1,233,32,95
+                    backg_color:( 0,0,0,0)
                     on_press: root.do_login(usr.text, password.text)
+

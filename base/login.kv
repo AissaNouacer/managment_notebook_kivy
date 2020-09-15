@@ -5,7 +5,7 @@
     background_normal:''
     back_color:( 0,1,1,.5)
 
-    border_radius:[18]
+    border_radius:[18,2,18,2]
     canvas.before:
         Color:
             rgba:self.back_color
@@ -35,6 +35,7 @@
                     id:usr
                     multiline:False
                     focus:True
+                    on_text_validate: password.focus=True
                 TextInput:
                     hint_text:"Password"
                     size_hint:( .4, .1)
@@ -42,11 +43,11 @@
                     id:password
                     password:True
                     multiline:False
-                    focus:True
+                    on_text_validate: root.do_login(usr.text, password.text)
                 SmoothButton:
                     pos_hint:{'right':0.7, 'y':0.1}
                     size_hint:( .4, .1)
                     text: "Login"
                     backg_color:( 0,0,0,0)
-                    on_press: root.do_login(usr.text, password.text)
+                    on_release: root.do_login(usr.text, password.text)
 
